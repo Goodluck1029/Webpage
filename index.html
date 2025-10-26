@@ -26,45 +26,64 @@
     }
     
     /* ===== Landing(첫 페이지) 레이아웃 ===== */
-    .main-landing{
+    /* ===== 메인 레이아웃 (좌·우 고정, 중앙 5분할) ===== */
+    .main-landing {
       position: relative;
-      min-height: calc(100vh - 140px); /* 상단바/하단 여백 감안 */
-      overflow: hidden;                 /* 바깥으로 넘치는 부분 가림 */
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      height: 90vh;                     /* ✅ 전체 높이 고정 (필요시 100vh 가능) */
+      overflow: hidden;
     }
     
-    /* 중앙 세로 스택( main_1~5 ) */
-    .main-center{
+    /* 좌우 고정 이미지 */
+    .main-side {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: auto;
+      height: 90vh;                     /* ✅ 고정 높이 */
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .main-left  { left: 0; }
+    .main-right { right: 0; }
+    
+    /* 중앙 스택 */
+    .main-center {
       position: relative;
-      z-index: 2;                       /* 좌우 이미지(1)보다 위에 = 겹쳐져도 중앙이 위 */
-      width: min(960px, 90vw);          /* 960px을 기준으로, 화면이 작으면 90vw */
-      margin: 40px auto 80px;
+      z-index: 2;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;   /* ✅ 위~아래 균등 분배 */
       align-items: center;
-      gap: 32px;
+      height: 90vh;                     /* ✅ 좌우 이미지와 동일한 높이 */
+      width: min(960px, 80vw);
+      margin: 0 auto;
     }
-    .main-center img{
+    
+    /* 중앙 이미지 5개 각각이 동일한 비율로 나눠짐 */
+    .main-center img {
       width: 100%;
-      height: auto;
+      height: 20%;                      /* ✅ 5장 = 20% * 5 = 100% */
+      object-fit: cover;                /* 여백 없이 꽉 채움 */
       display: block;
     }
     
-    /* 좌/우 사이드 이미지 */
-    .main-side{
-      position: fixed;                  /* 화면 고정 → 스크롤해도 자리에 고정 */
-      top: 120px;                       /* 상단바 아래에서 시작 */
-      bottom: 40px;
-      width: 28vw;                      /* 뷰포트 기준 가변 폭 */
-      max-width: 520px;
-      pointer-events: none;             /* 클릭 방해 X (아래 요소 클릭 가능) */
-      z-index: 1;                       /* 중앙(2)보다 아래 → 겹쳐도 중앙이 위 */
-      opacity: 0.5;                     /* 은은하게 */
+    /* 반응형 오버랩 효과 */
+    @media (max-width: 1280px) {
+      .main-side { opacity: 0.4; }
     }
-    .main-side img{
-      height: 100%;
-      width: auto;
-      object-fit: contain;
+    @media (max-width: 1024px) {
+      .main-side { opacity: 0.3; }
     }
+    @media (max-width: 920px) {
+      .main-side { opacity: 0.25; }
+    }
+
+
+
     
     /* 양쪽 정렬 */
     .main-left{  left: 0;  display:flex; justify-content:flex-end;  padding-right:24px; }
