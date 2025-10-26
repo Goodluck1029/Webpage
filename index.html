@@ -27,61 +27,50 @@
     
     /* ===== Landing(첫 페이지) 레이아웃 ===== */
     /* ===== 메인 레이아웃 (좌·우 고정, 중앙 5분할) ===== */
-    .main-landing {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      height: 90vh;                     /* ✅ 전체 높이 고정 (필요시 100vh 가능) */
-      overflow: hidden;
-    }
-    
-    /* 좌우 고정 이미지 */
-    .main-side {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: auto;
-      height: 90vh;                     /* ✅ 고정 높이 */
-      opacity: 0.5;
-      pointer-events: none;
-      z-index: 1;
-    }
-    .main-left  { left: 0; }
-    .main-right { right: 0; }
-    
-    /* 중앙 스택 */
-    .main-center {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;   /* ✅ 위~아래 균등 분배 */
-      align-items: center;
-      height: 90vh;                     /* ✅ 좌우 이미지와 동일한 높이 */
-      width: min(960px, 80vw);
-      margin: 0 auto;
-    }
-    
-    /* 중앙 이미지 5개 각각이 동일한 비율로 나눠짐 */
-    .main-center img {
-      width: 100%;
-      height: 20%;                      /* ✅ 5장 = 20% * 5 = 100% */
-      object-fit: cover;                /* 여백 없이 꽉 채움 */
-      display: block;
-    }
-    
-    /* 반응형 오버랩 효과 */
-    @media (max-width: 1280px) {
-      .main-side { opacity: 0.4; }
-    }
-    @media (max-width: 1024px) {
-      .main-side { opacity: 0.3; }
-    }
-    @media (max-width: 920px) {
-      .main-side { opacity: 0.25; }
-    }
+   /* ===== Landing(첫 페이지) — 두 번째 시안처럼 ===== */
+.main-landing{
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
 
+/* 중앙 세로 스택: 이미지 5장 계단식 */
+.main-center{
+  position: relative;
+  z-index: 2;
+  width: min(820px, 82vw);
+  margin: 0 auto;
+  padding: 80px 0;                 /* 상하 여백 */
+  display: flex;
+  flex-direction: column;
+  gap: 22px;                       /* 이미지 사이 간격 */
+}
+.main-center img{ display:block; height:auto; width:100%; }
+
+/* 각 이미지의 너비/정렬 (시안처럼 좌우로 번갈아 오프셋) */
+.mid1{ width:60%;  align-self:center; }   /* 중앙 시작 */
+.mid2{ width:72%;  align-self:flex-start; }/* 왼쪽으로 더 큼 */
+.mid3{ width:66%;  align-self:center; }   /* 다시 중앙 */
+.mid4{ width:78%;  align-self:flex-end; } /* 오른쪽으로 더 큼 */
+.mid5{ width:62%;  align-self:center; }   /* 마지막 중앙 */
+
+/* 좌/우 고정 포스터 */
+.main-side{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);     /* 세로 가운데 정렬 */
+  height: 82vh;                    /* 고정 높이(원하면 80~90vh로 조정) */
+  width: auto;
+  z-index: 1;                      /* 중앙보다 아래 → 겹치면 중앙이 위 */
+  opacity: .22;                    /* 배경 느낌만 나도록 옅게 */
+  pointer-events: none;
+}
+.main-left{  left: 3vw;  }
+.main-right{ right: 3vw; }
+
+/* 화면이 좁아질수록 좌/우를 더 옅게 */
+@media (max-width:1280px){ .main-side{ opacity:.18; } }
+@media (max-width:1024px){ .main-side{ opacity:.15; } }
 
 
     
