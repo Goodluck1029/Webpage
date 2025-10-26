@@ -29,6 +29,7 @@
 :root{
   /* 좌/우 이미지 폭 (뷰포트에 따라 값만 바꿉니다) */
   --sideW: 26vw;  /* 기본 */
+  --stackH: 84vh;   /* 필요하면 80~90vh로 조정 */
 }
 
 @media (max-width: 1400px){ :root{ --sideW: 30vw; } }
@@ -36,54 +37,51 @@
 @media (max-width: 1024px){ :root{ --sideW: 38vw; } }
 @media (max-width: 920px) { :root{ --sideW: 42vw; } }  /* 더 좁아지면 중앙과 더 겹침 */
 
+/* 컨테이너 */
 .main-landing{
   position: relative;
-  min-height: 100vh;
+  min-height: var(--stackH);
   overflow: hidden;
-  background: #C4C6C8;
+  background:#C4C6C8;
 }
 
-/* 중앙 스택: 너비는 유지(반응 범위 내), 이미지들은 '딱' 붙음 */
 .main-center{
   position: relative;
-  z-index: 2;                     /* 중앙이 항상 위 */
-  width: min(960px, 80vw);
+  z-index: 2;               /* 중앙이 위에 보이도록 */
+  height: var(--stackH);    /* ✅ 좌우와 같은 높이 */
+  width: auto;              /* 폭은 이미지에 의해 자연 결정 */
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 0;               /* 위아래 여백 제거(정말 '붙이기' 위해) */
   display: flex;
   flex-direction: column;
-  gap: 0;                         /* ✅ 붙이기 */
+  align-items: center;      /* 가로 중앙 정렬 */
+  justify-content: stretch;
+  gap: 0;                   /* ✅ 이미지 간 간격 0 */
 }
-.main-center img{
-  width: auto;            
-  height: auto;
-  display: block;                 /* 인라인 여백 제거 */
+
+/* 중앙 5장 — 각자 높이를 1/5로, 폭은 자동(비율 유지) */
+.main-center > img{
+  height: calc(100% / 5);   /* ✅ 5장 합 = 100% */
+  width: auto;              /* ✅ 폭 자동으로 변화 */
+  display: block;           /* 인라인 여백 제거 */
   margin: 0;
   border: 0;
 }
-
-/* 계단식 느낌(원하던 두 번째 이미지처럼) – 값은 필요에 따라 조절 가능 */
-.mid1{ width:60%;  align-self:center; }
-.mid2{ width:72%;  align-self:flex-start; }
-.mid3{ width:66%;  align-self:center; }
-.mid4{ width:78%;  align-self:flex-end; }
-.mid5{ width:62%;  align-self:center; }
-
-/* 좌/우 포스터: 폭만 변수로 제어 */
+    
+/* 좌/우 포스터 — 높이 고정, 폭 자동 */
 .main-side{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  height: 84vh;                   /* 좌우 고정 높이 */
-  width: var(--sideW);            /* ✅ 폭은 변수로만 변화 */
-  z-index: 1;                     /* 중앙보다 아래 */
+  height: var(--stackH);   /* ✅ 좌우 고정 높이 */
+  width: auto;
+  z-index: 1;
   opacity: .22;
   pointer-events: none;
   object-fit: contain;
 }
-.main-left{  left: 0;  }
+.main-left{  left: 0; }
 .main-right{ right: 0; }
-
 /* 더 좁아질수록 좌/우를 더 옅게 */
 @media (max-width:1280px){ .main-side{ opacity:.18; } }
 @media (max-width:1024px){ .main-side{ opacity:.15; } }
