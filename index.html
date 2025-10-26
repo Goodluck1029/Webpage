@@ -60,6 +60,21 @@
     .panel{display:none; padding:20px;}
     .panel.active{display:block;}
 
+
+     /* 1-컬럼 레이아웃 */
+    .single-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* 중앙 정렬 */
+    justify-content: center;
+    gap: 20px;
+    text-align: center;   /* 텍스트 중앙 정렬 */
+    background: #FFFACD;
+    padding: 20px;
+    }
+    .single-column h3 { font-size: 20px; }
+    .single-column p { font-size: 14px; line-height: 1.6; }
+
     /* 2-컬럼 레이아웃 */
     .two-columns{
       display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px;
@@ -108,14 +123,10 @@
   <main>
     <!-- MAIN -->
     <section id="main" class="panel active">
-      <div class="two-columns">
-        <div class="col">
-          <h3>과거를 기억하고, 오늘을 만들어가는 방법</h3>
-          <p>메인 페이지 왼쪽 콘텐츠 예시입니다. 소개문, 일정 등 원하는 내용을 배치하세요.</p>
-        </div>
-        <div class="col">
-          <img class="fluid-img" src="https://picsum.photos/seed/main/900/600" alt="메인 이미지" />
-        </div>
+      <div class="single-column">
+        <h3>과거를 기억하고, 오늘을 만들어가는 방법</h3>
+        <p>메인 페이지 왼쪽 콘텐츠 예시입니다. 소개문, 일정 등 원하는 내용을 배치하세요.</p>
+        <img src="https://picsum.photos/1200/500" alt="메인 이미지" style="width:100%; height:auto; margin-top:20px;" />
       </div>
     </section>
 
