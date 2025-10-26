@@ -36,7 +36,11 @@
 @media (max-width: 1200px){ :root{ --sideW: 34vw; } }
 @media (max-width: 1024px){ :root{ --sideW: 38vw; } }
 @media (max-width: 920px) { :root{ --sideW: 42vw; } }  /* 더 좁아지면 중앙과 더 겹침 */
+@media (max-width: 1400px){ :root{ --shift: 7vw; } }
+@media (max-width: 1200px){ :root{ --shift: 8vw; } }
+@media (max-width: 1024px){ :root{ --shift: 9vw; } }
 
+    
 /* 컨테이너 */
 .main-landing{
   position: relative;
@@ -67,6 +71,16 @@
   margin: 0;
   border: 0;
 }
+/* ✅ 계단식 쉬프트: 가운데 기준 좌/우로 이동 */
+.main-center > img.mid1 { transform: translateX( 0    ); }
+.main-center > img.mid2 { transform: translateX(calc(-1 * var(--shift))); } /* 왼쪽 */
+.main-center > img.mid3 { transform: translateX( 0    ); }                  /* 중앙 */
+.main-center > img.mid4 { transform: translateX( var(--shift) ); }          /* 오른쪽 */
+.main-center > img.mid5 { transform: translateX( 0    ); }                  /* 중앙 */
+
+
+
+    
     
 /* 좌/우 포스터 — 높이 고정, 폭 자동 */
 .main-side{
