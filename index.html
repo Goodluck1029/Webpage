@@ -30,16 +30,16 @@
   /* 좌/우 이미지 폭 (뷰포트에 따라 값만 바꿉니다) */
   --sideW: 26vw;  /* 기본 */
   --stackH: 84vh;   /* 필요하면 80~90vh로 조정 */
-  --shift: 6vw;    /* ✅ 기본 이동량 추가 (필수) */
+  --shift: 3vw;    /* ✅ 기본 이동량 추가 (필수) */
 }
 
 @media (max-width: 1400px){ :root{ --sideW: 30vw; } }
 @media (max-width: 1200px){ :root{ --sideW: 34vw; } }
 @media (max-width: 1024px){ :root{ --sideW: 38vw; } }
 @media (max-width: 920px) { :root{ --sideW: 42vw; } }  /* 더 좁아지면 중앙과 더 겹침 */
-@media (max-width: 1400px){ :root{ --shift: 7vw; } }
-@media (max-width: 1200px){ :root{ --shift: 8vw; } }
-@media (max-width: 1024px){ :root{ --shift: 9vw; } }
+@media (max-width: 1400px){ :root{ --shift: 5vw; } }
+@media (max-width: 1200px){ :root{ --shift: 6vw; } }
+@media (max-width: 1024px){ :root{ --shift: 7vw; } }
 
     
 /* 컨테이너 */
@@ -76,7 +76,7 @@
 .main-center > img.mid1 { transform: translateX( 0    ); }
 .main-center > img.mid2 { transform: translateX(calc(-1 * var(--shift))); } /* 왼쪽 */
 .main-center > img.mid3 { transform: translateX( 0    ); }                  /* 중앙 */
-.main-center > img.mid4 { transform: translateX( var(--shift) ); }          /* 오른쪽 */
+.main-center > img.mid4 { transform: translateX( var(--shift)-2vw ); }          /* 오른쪽 */
 .main-center > img.mid5 { transform: translateX( 0    ); }                  /* 중앙 */
 
 
