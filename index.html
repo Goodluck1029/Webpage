@@ -24,6 +24,64 @@
       min-width: 920px;   /* 최소 폭 */
       margin: 0 auto;     /* 가운데 정렬 */
     }
+    
+    /* ===== Landing(첫 페이지) 레이아웃 ===== */
+    .main-landing{
+      position: relative;
+      min-height: calc(100vh - 140px); /* 상단바/하단 여백 감안 */
+      overflow: hidden;                 /* 바깥으로 넘치는 부분 가림 */
+    }
+    
+    /* 중앙 세로 스택( main_1~5 ) */
+    .main-center{
+      position: relative;
+      z-index: 2;                       /* 좌우 이미지(1)보다 위에 = 겹쳐져도 중앙이 위 */
+      width: min(960px, 90vw);          /* 960px을 기준으로, 화면이 작으면 90vw */
+      margin: 40px auto 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+    .main-center img{
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* 좌/우 사이드 이미지 */
+    .main-side{
+      position: fixed;                  /* 화면 고정 → 스크롤해도 자리에 고정 */
+      top: 120px;                       /* 상단바 아래에서 시작 */
+      bottom: 40px;
+      width: 28vw;                      /* 뷰포트 기준 가변 폭 */
+      max-width: 520px;
+      pointer-events: none;             /* 클릭 방해 X (아래 요소 클릭 가능) */
+      z-index: 1;                       /* 중앙(2)보다 아래 → 겹쳐도 중앙이 위 */
+      opacity: 0.5;                     /* 은은하게 */
+    }
+    .main-side img{
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+    
+    /* 양쪽 정렬 */
+    .main-left{  left: 0;  display:flex; justify-content:flex-end;  padding-right:24px; }
+    .main-right{ right: 0; display:flex; justify-content:flex-start; padding-left: 24px; }
+    
+    /* 폭에 따른 연출(좁아질수록 더 겹치고, 투명도 높임) */
+    @media (max-width: 1280px){
+      .main-side{ opacity: .35; width: 34vw; }
+    }
+    @media (max-width: 1024px){
+      .main-side{ opacity: .28; width: 40vw; }
+    }
+    @media (max-width: 920px){
+      /* 최소 폭 정책을 쓰는 경우라면 여기는 거의 안 내려오지만, 대비용 */
+      .main-side{ opacity: .25; width: 45vw; }
+    }
+
 
     /* Top nav (좌측 탭들 + 우측 브랜드 버튼) */
     .nav{
@@ -123,12 +181,26 @@
   <main>
     <!-- MAIN -->
     <section id="main" class="panel active">
-      <div class="single-column">
-        <h3>과거를 기억하고, 오늘을 만들어가는 방법</h3>
-        <p>메인 페이지 왼쪽 콘텐츠 예시입니다. 소개문, 일정 등 원하는 내용을 배치하세요.</p>
-        <img src="https://picsum.photos/1200/500" alt="메인 이미지" style="width:100%; height:auto; margin-top:20px;" />
+      <div class="main-landing">
+        <!-- 좌/우 고정 이미지 -->
+        <div class="main-side main-left">
+          <img src="./images/main_left.png" alt="main left" />
+        </div>
+        <div class="main-side main-right">
+          <img src="./images/main_right.png" alt="main right" />
+        </div>
+    
+        <!-- 중앙 세로 스택 (위→아래) -->
+        <div class="main-center">
+          <img src="./images/main_1.png" alt="main 1" />
+          <img src="./images/main_2.png" alt="main 2" />
+          <img src="./images/main_3.png" alt="main 3" />
+          <img src="./images/main_4.png" alt="main 4" />
+          <img src="./images/main_5.png" alt="main 5" />
+        </div>
       </div>
     </section>
+
 
     <!-- ABOUT -->
     <section id="about" class="panel">
