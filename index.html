@@ -140,6 +140,9 @@
       width:180px; height:30px; line-height:28px; text-align:center;
       border:1px solid #ccc; background:#C4C6C8; color:#333; font-size:13px;
       cursor:pointer; transition:background .2s,color .2s,border-color .2s;
+        width:auto; padding:0 12px;
+        white-space:nowrap;                    /* 글자 줄바꿈 금지 */
+        flex:0 0 auto;                         /* ❗ shrink 방지(폭 줄이지 말기) */
     }
     .brand-btn:hover{background:#666}
     .brand-btn.active{background:#666; color:#fff; border-color:#666;}
