@@ -453,6 +453,11 @@
       else if(id==='pair1'){ tabs[3].classList.add('active'); }
       else if(id==='archive' || id==='workshop' || id==='exhibition'){ tabs[4].classList.add('active'); }
 
+        // ✅ 패널 표시 직후 '페이지 최상단'으로 스크롤
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
       // 아카이브 하위메뉴 표시/숨김 + 하위 active
       const isArchive = (id==='archive' || id==='workshop' || id==='exhibition');
       subnav.style.display = isArchive ? 'flex' : 'none';
