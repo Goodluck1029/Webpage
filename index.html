@@ -756,40 +756,40 @@
 </script>
 
 
-
-    
-  </script>
-
 <script>
 (function(){
-  const panel = document.getElementById('pair1');
-  if(!panel) return;
+  const panels = document.querySelectorAll('.subtab-panel');
+  const mq = window.matchMedia('(max-width:768px)');
 
-  const tabs = panel.querySelectorAll('.subtab');
-  const cols = panel.querySelectorAll('.subtab-content .col');
-
-  function activate(targetId){
-    tabs.forEach(btn => btn.classList.toggle('active', btn.dataset.target === targetId));
-    cols.forEach(col => col.classList.toggle('active', col.id === targetId));
+  function activate(panel, id){
+    const tabs = panel.querySelectorAll('.subtab');
+    const cols = panel.querySelectorAll('.subtab-content .col');
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+    cols.forEach(c => c.classList.toggle('active', c.id === id));
   }
 
-  function applyMode(){
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if(!isMobile){
-      // 데스크톱: 두 컬럼 모두 보이기
-      cols.forEach(c => c.classList.add('active'));
+  function apply(panel){
+    const tabs = panel.querySelectorAll('.subtab');
+    const cols = panel.querySelectorAll('.subtab-content .col');
+    if(!mq.matches){
+      cols.forEach(c => c.classList.add('active')); // 데스크톱 = 두 컬럼 모두 보이기
     }else{
-      // 모바일: 첫 번째 활성화
       const first = tabs[0]?.dataset.target || cols[0]?.id;
-      if(first) activate(first);
+      if(first) activate(panel, first); // 모바일 = 첫 컬럼만 보이기
     }
   }
 
-  tabs.forEach(btn => btn.addEventListener('click', () => activate(btn.dataset.target)));
-  applyMode();
-  window.addEventListener('resize', applyMode);
+  panels.forEach(panel => {
+    panel.querySelectorAll('.subtab').forEach(btn => {
+      btn.addEventListener('click', () => activate(panel, btn.dataset.target));
+    });
+    apply(panel);
+  });
+
+  mq.addEventListener('change', () => panels.forEach(apply));
 })();
 </script>
+
 
 </body>
 </html>
