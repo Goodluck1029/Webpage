@@ -179,6 +179,15 @@
       background:#C4C6C8; color:#333;
     }
 
+    .col img {
+      width: 100%;     /* ✅ 컬럼 너비에 맞춤 */
+      height: auto;    /* ✅ 세로 비율 자동 조정 (왜곡 방지) */
+      display: block;  /* ✅ 인라인 간격 제거 (하단 여백 방지) */
+      max-width: 100%; /* ✅ 부모보다 커지지 않게 안전장치 */
+    }
+
+
+    
     /* 타이포: 본문만 12px, 리스트도 12px */
     .col p{margin:8px 0; line-height:1.6; font-size:12px;}
     .col li{font-size:12px; line-height:1.6;}
