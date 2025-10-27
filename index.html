@@ -304,6 +304,18 @@
     }
   }
     
+ /* ===== 데스크톱에서는 버튼 폭 정상화 ===== */
+@media (min-width: 769px){
+  .brand-btn {
+    flex: 0 0 auto;    /* ← 폭 고정 (늘어나지 않게) */
+    width: auto;       /* 자동폭 */
+  }
+  .tab:last-of-type {
+    flex: 0 0 auto;    /* ← 아카이브실 버튼도 원래 크기로 */
+  }
+}
+
+    
     
   </style>
 </head>
