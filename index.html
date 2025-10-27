@@ -329,22 +329,26 @@
 }
     
   
-/* ===== pair1: 데스크톱=2컬럼, 모바일=서브탭 전환 ===== */
-#pair1 .subtabs { display: none; }
-#pair1 .subtab-content { display: flex; flex-wrap: wrap; gap: 20px; }
-#pair1 .subtab-content .col { flex: 1 1 calc(50% - 20px); box-sizing: border-box; }
-#pair1 .subtab-content .col img { width: 100%; height: auto; display: block; border-radius: 6px; }
-
-@media (max-width: 768px){
-  #pair1 .subtabs { display: flex; gap: 8px; justify-content: center; margin: 12px 0; }
-  #pair1 .subtab { border: 1px solid #aaa; background: #eee; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 14px; }
-  #pair1 .subtab.active { background: #666; color: #fff; border-color: #666; }
-
-  #pair1 .subtab-content { display: block; }
-  #pair1 .subtab-content .col { display: none; }
-  #pair1 .subtab-content .col.active { display: block; }
+/* ===== pair1: 데스크톱 기본값을 강제로 복구 ===== */
+#pair1 .subtabs{ display:none !important; }                   /* 데스크톱에선 서브탭 숨김 */
+#pair1 .subtab-content{
+  display:flex !important; flex-wrap:wrap; gap:20px;          /* 2칼럼 컨테이너 */
+}
+#pair1 .subtab-content .col{
+  display:block !important;                                   /* 둘 다 보이기 */
+  flex:1 1 calc(50% - 20px); box-sizing:border-box;           /* 50% 칼럼 */
 }
 
+/* ===== 모바일에서만 서브탭 + 1칼럼 전환 ===== */
+@media (max-width:768px){
+  #pair1 .subtabs{ display:flex !important; gap:8px; justify-content:center; margin:12px 0; }
+  #pair1 .subtab{ border:1px solid #aaa; background:#eee; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:14px; }
+  #pair1 .subtab.active{ background:#666; color:#fff; border-color:#666; }
+
+  #pair1 .subtab-content{ display:block !important; }
+  #pair1 .subtab-content .col{ display:none !important; }     /* 기본 숨김 */
+  #pair1 .subtab-content .col.active{ display:block !important; } /* 선택만 표시 */
+}
 
   </style>
 </head>
