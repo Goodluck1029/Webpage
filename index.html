@@ -245,10 +245,17 @@
 .desktop-only { display: block; }
 .mobile-only { display: none; }
 
-/* 뷰포트가 768px 이하일 때 스위치 */
+.panel.active.desktop-only { display: block; }  /* 기본은 데스크톱용 노출 */
+.panel.active.mobile-only  { display: none; }   /* 기본은 모바일용 숨김 */
+
 @media (max-width: 768px) {
-  .desktop-only { display: none; }
-  .mobile-only { display: block; }
+  .panel.active.desktop-only { display: none; } /* 모바일에선 데스크톱 숨김 */
+  .panel.active.mobile-only  { display: block; }/* 모바일에선 모바일용 노출 */
+}
+
+/* (권장) 모바일에서 min-width 해제 */
+@media (max-width: 768px){
+  main { min-width: 0; }
 }
 
     
