@@ -292,9 +292,6 @@
       flex: 1 1 calc(50% - 8px);
       order: 1;
     }
- 
-  
-    }
     .brand-btn{
       order: 2;
       flex: 1 1 50%;
@@ -304,18 +301,23 @@
     }
   }
     
- /* ===== 데스크톱에서는 버튼 폭 정상화 ===== */
-@media (min-width: 769px){
-  .brand-btn {
-    flex: 0 0 auto;    /* ← 폭 고정 (늘어나지 않게) */
-    width: auto;       /* 자동폭 */
+ /* 모바일 메인 이미지 화면 맞춤 */
+  #main-m .main-landing{
+    min-height:auto;
+    overflow:visible;
+    padding:0;
   }
-  .tab:last-of-type {
-    flex: 0 0 auto;    /* ← 아카이브실 버튼도 원래 크기로 */
+  #main-m .main-landing > img{
+    width:100% !important;
+    height:auto !important;
+    display:block;
+    object-fit:contain;                  /* 전체 보이기 */
+    max-height:calc(100vh - 140px);      /* 상단 네비 여백 감안 (필요시 120~160px로 조정) */
   }
 }
 
-    
+
+
     
   </style>
 </head>
@@ -365,7 +367,7 @@
     <section id="main-m" class="panel mobile-only">
       <div class="main-landing">
         <!-- 예: 모바일 화면용 간단한 이미지나 문구 -->
-        <img src="./images/main_mobile.png" alt="모바일 메인" style="width:auto; height:100%;">
+        <img src="./images/main_mobile.png" alt="모바일 메인" style="width:100%; height:auto;">
         <div style="text-align:center; padding:20px;">
           <h2>예술에삶 시각문화연구소</h2>
           <p>삶을 예술로 기록하는 프로젝트</p>
