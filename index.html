@@ -264,8 +264,33 @@
 
 /* 모바일에서 min-width 해제 */
 @media (max-width: 768px){
-  main { min-width: 0 !important; }
+  .nav{
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:stretch;
+  }
 
+  .nav-left{
+    display:contents; /* tab들을 nav의 직계 flex 아이템으로 */
+  }
+
+  .tab{
+    flex:1 1 calc(50% - 8px);
+    width:auto;
+    box-sizing:border-box;
+  }
+
+  /* 마지막 탭 + 브랜드 버튼 같은 줄 */
+  .tab:last-of-type{
+    order:2;
+    flex:1 1 50%;
+    text-align:left;
+  }
+  .brand-btn{
+    order:2;
+    flex:1 1 50%;
+    text-align:right;
+  }
 }
 
     
