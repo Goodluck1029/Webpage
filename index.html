@@ -329,16 +329,7 @@
       
     }
     
-  
-    /* ===== pair1: 데스크톱 기본값을 강제로 복구 ===== */
-    #pair1 .subtabs{ display:none !important; }                   /* 데스크톱에선 서브탭 숨김 */
-    #pair1 .subtab-content{
-      display:flex !important; flex-wrap:wrap; gap:20px;          /* 2칼럼 컨테이너 */
-    }
-    #pair1 .subtab-content .col{
-      display:block !important;                                   /* 둘 다 보이기 */
-      flex:1 1 calc(50% - 20px); box-sizing:border-box;           /* 50% 칼럼 */
-    }
+
 
     /* ===== 공통: subtab-panel (데스크톱=2칼럼, 모바일=서브탭) ===== */
     .subtab-panel .subtabs { display:none; }
