@@ -11,6 +11,8 @@
     font-weight: normal;
     font-style: normal;
     }  
+
+    
     /* Base */
     body{
       margin:0;
@@ -25,81 +27,81 @@
       margin: 0 auto;     /* 가운데 정렬 */
     }
     
-/* ===== Landing 레이아웃 ===== */
-:root{
-  /* 좌/우 이미지 폭 (뷰포트에 따라 값만 바꿉니다) */
-  --sideW: 26vw;  /* 기본 */
-  --stackH: 84vh;   /* 필요하면 80~90vh로 조정 */
-  --shift: 3vw;    /* ✅ 기본 이동량 추가 (필수) */
-}
-
-@media (max-width: 1400px){ :root{ --sideW: 30vw; } }
-@media (max-width: 1200px){ :root{ --sideW: 34vw; } }
-@media (max-width: 1024px){ :root{ --sideW: 38vw; } }
-@media (max-width: 920px) { :root{ --sideW: 42vw; } }  /* 더 좁아지면 중앙과 더 겹침 */
-@media (max-width: 1400px){ :root{ --shift: 5vw; } }
-@media (max-width: 1200px){ :root{ --shift: 6vw; } }
-@media (max-width: 1024px){ :root{ --shift: 7vw; } }
+    /* ===== Landing 레이아웃 ===== */
+    :root{
+      /* 좌/우 이미지 폭 (뷰포트에 따라 값만 바꿉니다) */
+      --sideW: 26vw;  /* 기본 */
+      --stackH: 84vh;   /* 필요하면 80~90vh로 조정 */
+      --shift: 3vw;    /* ✅ 기본 이동량 추가 (필수) */
+    }
+    
+    @media (max-width: 1400px){ :root{ --sideW: 30vw; } }
+    @media (max-width: 1200px){ :root{ --sideW: 34vw; } }
+    @media (max-width: 1024px){ :root{ --sideW: 38vw; } }
+    @media (max-width: 920px) { :root{ --sideW: 42vw; } }  /* 더 좁아지면 중앙과 더 겹침 */
+    @media (max-width: 1400px){ :root{ --shift: 5vw; } }
+    @media (max-width: 1200px){ :root{ --shift: 6vw; } }
+    @media (max-width: 1024px){ :root{ --shift: 7vw; } }
 
     
-/* 컨테이너 */
-.main-landing{
-  position: relative;
-  min-height: var(--stackH);
-  overflow: hidden;
-  background:#C4C6C8;
-}
-
-.main-center{
-  position: relative;
-  z-index: 2;               /* 중앙이 위에 보이도록 */
-  height: var(--stackH);    /* ✅ 좌우와 같은 높이 */
-  width: auto;              /* 폭은 이미지에 의해 자연 결정 */
-  margin: 0 auto;
-  padding: 0;               /* 위아래 여백 제거(정말 '붙이기' 위해) */
-  display: flex;
-  flex-direction: column;
-  align-items: center;      /* 가로 중앙 정렬 */
-  justify-content: stretch;
-  gap: 0;                   /* ✅ 이미지 간 간격 0 */
-}
-
-/* 중앙 5장 — 각자 높이를 1/5로, 폭은 자동(비율 유지) */
-.main-center > img{
-  height: calc(100% / 5);   /* ✅ 5장 합 = 100% */
-  width: auto;              /* ✅ 폭 자동으로 변화 */
-  display: block;           /* 인라인 여백 제거 */
-  margin: 0;
-  border: 0;
-}
-/* ✅ 계단식 쉬프트: 가운데 기준 좌/우로 이동 */
-.main-center > img.mid1 { transform: translateX( 0    ); }
-.main-center > img.mid2 { transform: translateX(calc(-1 * var(--shift))); } /* 왼쪽 */
-.main-center > img.mid3 { transform: translateX( 0    ); }                  /* 중앙 */
-.main-center > img.mid4 { transform: translateX(calc(-1 * var(--shift) - 2vw)); }          /* 오른쪽 */
-.main-center > img.mid5 { transform: translateX( 0    ); }                  /* 중앙 */
-
+    /* 컨테이너 */
+    .main-landing{
+      position: relative;
+      min-height: var(--stackH);
+      overflow: hidden;
+      background:#C4C6C8;
+    }
+    
+    .main-center{
+      position: relative;
+      z-index: 2;               /* 중앙이 위에 보이도록 */
+      height: var(--stackH);    /* ✅ 좌우와 같은 높이 */
+      width: auto;              /* 폭은 이미지에 의해 자연 결정 */
+      margin: 0 auto;
+      padding: 0;               /* 위아래 여백 제거(정말 '붙이기' 위해) */
+      display: flex;
+      flex-direction: column;
+      align-items: center;      /* 가로 중앙 정렬 */
+      justify-content: stretch;
+      gap: 0;                   /* ✅ 이미지 간 간격 0 */
+    }
+    
+    /* 중앙 5장 — 각자 높이를 1/5로, 폭은 자동(비율 유지) */
+    .main-center > img{
+      height: calc(100% / 5);   /* ✅ 5장 합 = 100% */
+      width: auto;              /* ✅ 폭 자동으로 변화 */
+      display: block;           /* 인라인 여백 제거 */
+      margin: 0;
+      border: 0;
+    }
+    /* ✅ 계단식 쉬프트: 가운데 기준 좌/우로 이동 */
+    .main-center > img.mid1 { transform: translateX( 0    ); }
+    .main-center > img.mid2 { transform: translateX(calc(-1 * var(--shift))); } /* 왼쪽 */
+    .main-center > img.mid3 { transform: translateX( 0    ); }                  /* 중앙 */
+    .main-center > img.mid4 { transform: translateX(calc(-1 * var(--shift) - 2vw)); }          /* 오른쪽 */
+    .main-center > img.mid5 { transform: translateX( 0    ); }                  /* 중앙 */
+    
 
 
     
-    
-/* 좌/우 포스터 — 높이 고정, 폭 자동 */
-.main-side{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: var(--stackH);   /* ✅ 좌우 고정 높이 */
-  width: auto;
-  z-index: 1;
-  opacity: .22;
-  pointer-events: none;
-  object-fit: contain;
-}
-.main-left{  left: 0; }
-.main-right{ right: 0; }
-/* 더 좁아질수록 좌/우를 더 옅게 */
-@media (max-width:1280px){ .main-side{ opacity:.18; } }
-@media (max-width:1024px){ .main-side{ opacity:.15; } }
+        
+    /* 좌/우 포스터 — 높이 고정, 폭 자동 */
+    .main-side{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: var(--stackH);   /* ✅ 좌우 고정 높이 */
+      width: auto;
+      z-index: 1;
+      opacity: .22;
+      pointer-events: none;
+      object-fit: contain;
+    }
+    .main-left{  left: 0; }
+    .main-right{ right: 0; }
+    /* 더 좁아질수록 좌/우를 더 옅게 */
+    @media (max-width:1280px){ .main-side{ opacity:.18; } }
+    @media (max-width:1024px){ .main-side{ opacity:.15; } }
 
     
     /* 양쪽 정렬 */
@@ -239,11 +241,15 @@
     scroll-behavior: smooth;
   }
 
+/* === 메인 페이지 데스크톱/모바일 전환 === */
+.desktop-only { display: block; }
+.mobile-only { display: none; }
 
-
-
-
-
+/* 뷰포트가 768px 이하일 때 스위치 */
+@media (max-width: 768px) {
+  .desktop-only { display: none; }
+  .mobile-only { display: block; }
+}
 
     
   </style>
@@ -270,7 +276,7 @@
 
   <main>
     <!-- MAIN -->
-    <section id="main" class="panel active">
+    <section id="main" class="panel active desktop-only">
       <div class="main-landing">
         <!-- 좌/우 포스터 -->
         <img class="main-side main-left"  src="./images/main_left.png"  alt="left poster">
@@ -286,7 +292,16 @@
         </div>
       </div>
     </section>
-
+    <section id="main-m" class="panel mobile-only">
+      <div class="main-landing">
+        <!-- 예: 모바일 화면용 간단한 이미지나 문구 -->
+        <img src="./images/main_mobile.jpg" alt="모바일 메인" style="width:100%; height:auto;">
+        <div style="text-align:center; padding:20px;">
+          <h2>예술에삶 시각문화연구소</h2>
+          <p>삶을 예술로 기록하는 프로젝트</p>
+        </div>
+      </div>
+    </section>
 
     <!-- ABOUT -->
     <section id="about" class="panel">
