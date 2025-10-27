@@ -155,10 +155,6 @@
     .sub:hover{background:rgba(0,0,0,.06)}
     .sub.active{font-weight:700; color:#0c3a5a; background:rgba(12,58,90,.08)}
 
-    /* 공통 패널 */
-    .panel{display:none; padding:20px;}
-    .panel.active{display:block;}
-
 
      /* 1-컬럼 레이아웃 */
     .single-column {
@@ -241,21 +237,27 @@
     scroll-behavior: smooth;
   }
 
-/* === 메인 페이지 데스크톱/모바일 전환 === */
-.desktop-only { display: block; }
-.mobile-only { display: none; }
 
-.panel.active.desktop-only { display: block; }  /* 기본은 데스크톱용 노출 */
-.panel.active.mobile-only  { display: none; }   /* 기본은 모바일용 숨김 */
+/* ===== 강제 숨김/표시: 패널 제어 (최우선) ===== */
+/* 기본: 모든 패널 숨김, active만 보이기 */
+.panel { display: none !important; }
+.panel.active { display: block !important; }
 
-@media (max-width: 768px) {
-  .panel.active.desktop-only { display: none; } /* 모바일에선 데스크톱 숨김 */
-  .panel.active.mobile-only  { display: block; }/* 모바일에선 모바일용 노출 */
+/* 데스크톱/모바일 전환은 active에만 적용 */
+.desktop-only, .mobile-only { display: none !important; }
+.panel.active.desktop-only { display: block !important; }
+@media (max-width: 768px){
+  .panel.active.desktop-only { display: none !important; }
+  .panel.active.mobile-only  { display: block !important; }
 }
 
-/* (권장) 모바일에서 min-width 해제 */
+/* 메인 두 섹션은 active 아니면 ‘무조건’ 숨김 (우발적 노출 차단) */
+#main:not(.active),
+#main-m:not(.active) { display: none !important; }
+
+/* 모바일에서 min-width 해제 */
 @media (max-width: 768px){
-  main { min-width: 0; }
+  main { min-width: 0 !important; }
 }
 
     
