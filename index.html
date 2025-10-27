@@ -321,30 +321,41 @@
     scroll-behavior: smooth;
   }
 
-
-/* ===== 강제 숨김/표시: 패널 제어 (최우선) ===== */
-/* 기본: 모든 패널 숨김, active만 보이기 */
-.panel { display: none !important; }
-.panel.active { display: block !important; }
-
-/* 데스크톱/모바일 전환은 active에만 적용 */
-.desktop-only, .mobile-only { display: none !important; }
-.panel.active.desktop-only { display: block !important; }
-@media (max-width: 768px){
-  .panel.active.desktop-only { display: none !important; }
-  .panel.active.mobile-only  { display: block !important; }
-}
-
-/* 메인 두 섹션은 active 아니면 ‘무조건’ 숨김 (우발적 노출 차단) */
-#main:not(.active),
-#main-m:not(.active) { display: none !important; }
-
-/* 모바일에서 min-width 해제 */
-@media (max-width: 768px){
-  main { min-width: 0 !important; }
-
-}
-
+    /* ===== 패널 제어 (최우선) ===== */
+    /* 기본: 모든 패널 숨김, active만 보이기 */
+    .panel { display: none !important; }
+    .panel.active { display: block !important; }
+    
+    /* 비활성 패널은 디바이스 플래그와 무관하게 무조건 숨김 */
+    .panel.desktop-only:not(.active),
+    .panel.mobile-only:not(.active) { display: none !important; }
+    
+    /* ===== 데스크톱 우선: 디바이스별 노출 기본값 ===== */
+    /* 패널 자체의 디바이스 타겟 */
+    .panel.active.desktop-only { display: block !important; }
+    .panel.active.mobile-only  { display: none !important; }
+    
+    /* 패널 내부 요소의 디바이스 타겟 */
+    .panel.active .desktop-only { display: block !important; }
+    .panel.active .mobile-only  { display: none !important; }
+    
+    /* ===== 메인 섹션 보호: active 아니면 절대 노출 금지 ===== */
+    #main:not(.active),
+    #main-m:not(.active) { display: none !important; }
+    
+    /* ===== 모바일 전용 오버라이드 ===== */
+    @media (max-width: 768px){
+      /* 패널 자체 스왑 */
+      .panel.active.desktop-only { display: none !important; }
+      .panel.active.mobile-only  { display: block !important; }
+    
+      /* 패널 내부 요소 스왑 */
+      .panel.active .desktop-only { display: none !important; }
+      .panel.active .mobile-only  { display: block !important; }
+    
+      /* 모바일에서 min-width 해제 */
+      main { min-width: 0 !important; }
+    }
     
   </style>
 </head>
