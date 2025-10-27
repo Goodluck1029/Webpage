@@ -265,7 +265,11 @@
       <button class="tab" onclick="show('pair1')">이서석×곽지수</button>
       <button class="tab" onclick="show('archive')">아카이브실</button>
     </div>
-    <button class="brand-btn" onclick="show('main')">예술에삶 시각문화연구소</button>
+    <!-- 기존: onclick="show('main')" -->
+    <button class="brand-btn" onclick="(function(){
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      show(isMobile ? 'main-m' : 'main');
+    })()">예술에삶 시각문화연구소</button>
   </nav>
 
   <!-- 아카이브 하위 버튼: 아카이브 상태에서만 보이게 -->
@@ -478,8 +482,22 @@
       subExhibition.classList.toggle('active', id==='exhibition');
     }
 
-    // 초기 상태
-    show('main');
+    // ✅ 초기 진입 시: 화면 폭 기준으로 메인 패널 선택
+    function showMainByViewport(){
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      show(isMobile ? 'main-m' : 'main');
+    }
+  
+    // 초기 진입
+    showMainByViewport();
+  
+    // (선택) 화면 회전/리사이즈 시 메인 탭일 때만 동기화
+    window.addEventListener('resize', () => {
+      const active = document.querySelector('.panel.active')?.id;
+      if(active === 'main' || active === 'main-m'){
+        showMainByViewport();
+      }
+    });
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
