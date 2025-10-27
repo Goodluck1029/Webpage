@@ -295,61 +295,83 @@
       order: 1;
     }
   
-    /* (C) 일반 탭들: 2열 */
-    .tab{
-      width: auto;
-      box-sizing: border-box;
-      flex: 1 1 calc(50% - 8px);
-      order: 1;
+      /* (C) 일반 탭들: 2열 */
+      .tab{
+        width: auto;
+        box-sizing: border-box;
+        flex: 1 1 calc(50% - 8px);
+        order: 1;
+      }
+      .brand-btn{
+        order: 2;
+        flex: 1 1 50%;
+        width: auto;
+        white-space: nowrap;
+      }
     }
-    .brand-btn{
-      order: 2;
-      flex: 1 1 50%;
-      width: auto;
-      white-space: nowrap;
+    
+    
+    @media (max-width: 768px){
+      #main-m .main-landing{
+        min-height: 100vh;
+        display: flex; align-items: center; justify-content: center;
+        flex-direction: column;
+        padding: 0; margin: 0; overflow: hidden;
+        background:#C4C6C8;
+      }
+      #main-m .main-landing > img{
+        width: 100%;
+        height: calc(100vh - 120px);  /* 상단 네비 높이만큼 보정(필요시 100~150px로 조정) */
+        object-fit: contain;          /* ← 좌우 모두 보이기 */
+        object-position: center center;
+        display: block;
+      }
+      
     }
-  }
-  
-    
-@media (max-width: 768px){
-  #main-m .main-landing{
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column;
-    padding: 0; margin: 0; overflow: hidden;
-    background:#C4C6C8;
-  }
-  #main-m .main-landing > img{
-    width: 100%;
-    height: calc(100vh - 120px);  /* 상단 네비 높이만큼 보정(필요시 100~150px로 조정) */
-    object-fit: contain;          /* ← 좌우 모두 보이기 */
-    object-position: center center;
-    display: block;
-  }
-  
-}
     
   
-/* ===== pair1: 데스크톱 기본값을 강제로 복구 ===== */
-#pair1 .subtabs{ display:none !important; }                   /* 데스크톱에선 서브탭 숨김 */
-#pair1 .subtab-content{
-  display:flex !important; flex-wrap:wrap; gap:20px;          /* 2칼럼 컨테이너 */
-}
-#pair1 .subtab-content .col{
-  display:block !important;                                   /* 둘 다 보이기 */
-  flex:1 1 calc(50% - 20px); box-sizing:border-box;           /* 50% 칼럼 */
-}
+    /* ===== pair1: 데스크톱 기본값을 강제로 복구 ===== */
+    #pair1 .subtabs{ display:none !important; }                   /* 데스크톱에선 서브탭 숨김 */
+    #pair1 .subtab-content{
+      display:flex !important; flex-wrap:wrap; gap:20px;          /* 2칼럼 컨테이너 */
+    }
+    #pair1 .subtab-content .col{
+      display:block !important;                                   /* 둘 다 보이기 */
+      flex:1 1 calc(50% - 20px); box-sizing:border-box;           /* 50% 칼럼 */
+    }
 
-/* ===== 모바일에서만 서브탭 + 1칼럼 전환 ===== */
-@media (max-width:768px){
-  #pair1 .subtabs{ display:flex !important; gap:8px; justify-content:center; margin:12px 0; }
-  #pair1 .subtab{ border:1px solid #aaa; background:#eee; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:14px; }
-  #pair1 .subtab.active{ background:#666; color:#fff; border-color:#666; }
-
-  #pair1 .subtab-content{ display:block !important; }
-  #pair1 .subtab-content .col{ display:none !important; }     /* 기본 숨김 */
-  #pair1 .subtab-content .col.active{ display:block !important; } /* 선택만 표시 */
-}
+    /* ===== 공통: subtab-panel (데스크톱=2칼럼, 모바일=서브탭) ===== */
+    .subtab-panel .subtabs{ display:none; }                         /* 데스크톱은 서브탭 숨김 */
+    .subtab-panel .subtab-content{
+      display:flex; flex-wrap:wrap; gap:20px;
+    }
+    .subtab-panel .subtab-content .col{
+      display:block;
+      flex:1 1 calc(50% - 20px);
+      box-sizing:border-box;
+    }
+    .subtab-panel .subtab-content .col img{
+      width:100%; height:auto; display:block; border-radius:6px;
+    }
+    
+    /* 모바일: 서브탭 보이기 + 한 칼럼만 표시 */
+    @media (max-width:768px){
+      .subtab-panel .subtabs{
+        display:flex; gap:8px; justify-content:center; margin:12px 0;
+      }
+      .subtab-panel .subtab{
+        border:1px solid #aaa; background:#eee; padding:6px 12px;
+        border-radius:4px; cursor:pointer; font-size:14px;
+      }
+      .subtab-panel .subtab.active{ background:#666; color:#fff; border-color:#666; }
+    
+      .subtab-panel .subtab-content{ display:block; }
+      .subtab-panel .subtab-content .col{ display:none; }
+      .subtab-panel .subtab-content .col.active{ display:block; }
+    }
+    
+    /* 본문 가독성 (선택 사항) */
+    .subtab-panel .content{ line-height:1.7; margin-top:10px; }
 
   </style>
 </head>
@@ -569,10 +591,16 @@
     </section>
 
 
-    <section id="pair2" class="panel">
-      <div class="two-columns">
-        
-        <div class="col"><h3>김금옥</h3>
+    <section id="pair2" class="panel subtab-panel">
+      <!-- 모바일 전용 서브탭 -->
+      <div class="subtabs">
+        <button class="subtab active" data-target="pair2-col-a">김금옥</button>
+        <button class="subtab" data-target="pair2-col-b">안성석</button>
+      </div>
+      
+      <div class="subtab-content">  
+        <div id="pair2-col-a" class="col active">
+          <h3>김금옥</h3>
           <p>여, 70대, 용인시 성복동 거주</p>
         
           <!-- 📘 목차 -->
@@ -604,16 +632,28 @@
           <p>지금의 나는 여전히 배우고 있다. …</p>
         
         </div>
-        <div class="col"> <div class="col"><h3>안성석</h3>
+        <div class="pair2-col-b"> <div class="col"><h3>안성석</h3>
         <img class="fluid-img" src="https://picsum.photos/seed/p2/1200/800" alt="김금옥×안성석" /></div>
       </div>
     </section>
 
-    <section id="pair3" class="panel">
-      <div class="two-columns">
-        <div class="col"><h3>박지혜×한재석</h3><p>작가 소개 및 작업 노트 등을 입력하세요.</p></div>
-        <div class="col"><img class="fluid-img" src="https://picsum.photos/seed/p3/1200/800" alt="박지혜×한재석" /></div>
+    <section id="pair3" class="panel subtab-panel">
+      <div class="subtabs">
+        <button class="subtab active" data-target="pair3-col-a">박지혜</button>
+        <button class="subtab" data-target="pair3-col-b">한재석</button>
       </div>
+      <div class="subtab-content">
+        <div id="pair3-col-a" class="col active">
+          <h3>박지혜</h3>
+          <img src="./images/parkjihye.png" alt="박지혜">
+          <div class="content"><p>박지혜 소개/텍스트…</p></div>
+        </div>
+    
+        <div id="pair3-col-b" class="col">
+          <h3>한재석</h3>
+          <img src="./images/hanjaeseok.png" alt="한재석">
+          <div class="content"><p>한재석 소개/텍스트…</p></div>
+        </div>
     </section>
 
     <!-- ARCHIVE (개요) -->
