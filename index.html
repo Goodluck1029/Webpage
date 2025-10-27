@@ -264,40 +264,41 @@
 
 /* 아래는 모바일 전용 */
     
-/* 공통: 가로 정렬 + 줄바꿈 허용 */
-@media (max-width: 768px){
-  .nav{
-    gap:8px;                 /* 줄바꿈 간격 */
-    align-items:stretch;
-  }
 
-  /* 왼쪽 탭 묶음도 스스로 줄바꿈하도록 */
-  .nav-left{
-    flex:1 1 100%;
-    flex-wrap:wrap;          /* ← 탭들이 다음 줄로 감 */
-    gap:8px;
-    order:1;                 /* 첫 줄 */
+  /* ✅ 모바일 전용 추가 (새로 추가) */
+  @media (max-width: 768px){
+  
+    /* (A) nav 전체: 줄바꿈 시 간격 유지 */
+    .nav{
+      gap:8px;                 /* 줄 간격 (추가됨) */
+      align-items:stretch;     /* 아래로 펼치기 (추가됨) */
+    }
+  
+    /* (B) 왼쪽 탭 묶음 */
+    .nav-left{
+      flex:1 1 100%;           /* 폭 100%로 확장 (추가됨) */
+      flex-wrap:wrap;          /* 줄바꿈 허용 (추가됨) */
+      gap:8px;                 /* 버튼 간격 (추가됨) */
+      order:1;                 /* 상단 순서 유지 (추가됨) */
+    }
+  
+    /* (C) 각 탭 버튼 */
+    .tab{
+      width:auto;              /* 기존 width:100px 덮어씀 (수정됨) */
+      min-width:110px;         /* 너무 좁지 않게 (추가됨, 선택사항) */
+      flex:1 1 calc(50% - 8px);/* 2열로 떨어지게 (추가됨) */
+      box-sizing:border-box;   /* 여백 계산 정확히 (추가됨) */
+    }
+    /* 만약 1열로 쫙 빼고 싶으면 이걸로 바꿔도 됨:
+       .tab{ flex:1 1 100%; } */
+  
+    /* (D) 브랜드 버튼 */
+    .brand-btn{
+      order:2;                 /* 두 번째 줄로 이동 (추가됨) */
+      flex:1 1 100%;           /* 전체 폭 차지 (추가됨) */
+      width:auto;              /* 기존 width 해제 (수정됨) */
+    }
   }
-
-  /* 탭: 고정폭 해제해줘야 줄바꿈/줄맞춤이 자연스러움 */
-  .tab{
-    width:auto;              /* ← 100px 제거 효과 */
-    min-width:110px;         /* 너무 좁아지지 않게(선택) */
-    flex:1 1 calc(50% - 8px);/* 2열로 떨어지게; 1열 원하면 100% */
-    box-sizing:border-box;
-  }
-  /* 1열로 쫙 빼고 싶으면 위 한 줄을 이렇게 바꿔도 됨:
-     .tab{ flex:1 1 100%; } */
-
-  /* 브랜드 버튼: 다음 줄(아래줄)로 보내고 풀폭 */
-  .brand-btn{
-    order:2;                 /* ← 아래줄로 */
-    flex:1 1 100%;           /* 가로 꽉 차게 */
-    width:auto;              /* 180px 고정폭 해제 */
-    white-space:nowrap;      /* 텍스트만 줄바꿈 금지(유지) */
-  }
-}
-
 
     
     
