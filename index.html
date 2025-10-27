@@ -267,7 +267,7 @@
 
   /* ✅ 모바일 전용 추가 (새로 추가) */
   
-      @media (max-width: 768px){
+  @media (max-width: 768px){
   
     /* (A) nav 전체: 줄바꿈 시 간격 유지 */
     .nav{
@@ -298,30 +298,23 @@
       width: auto;
       white-space: nowrap;
     }
-  }
-    
- /* 모바일 메인 이미지 화면 맞춤 */
-  #main-m .main-landing{
-      min-height: 100vh;
-      overflow: hidden;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      align-items: center;      /* 세로 중앙 */
-      justify-content: center;  /* 가로 중앙 */
-      background: #C4C6C8;      /* 이미지 비율 유지 시 빈 공간 배경 */
-    }
   
-    /* 메인 이미지 설정 */
-    #main-m .main-landing > img{
-      display: block;
-      width: 100%;
-      height: calc(100vh - 120px); /* 상단 네비 높이 뺀 값 (필요에 따라 100~150px 조정) */
-      object-fit: contain;         /* ✅ 좌우 전체 보이기 */
-      object-position: center center; /* 가운데 정렬 */
-    }
-
-
+    
+@media (max-width: 768px){
+  #main-m .main-landing{
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0; margin: 0; overflow: hidden;
+    background:#C4C6C8;
+  }
+  #main-m .main-landing > img{
+    width: 100%;
+    height: calc(100vh - 120px);  /* 상단 네비 높이만큼 보정(필요시 100~150px로 조정) */
+    object-fit: contain;          /* ← 좌우 모두 보이기 */
+    object-position: center center;
+    display: block;
+  }
+}
     
   </style>
 </head>
