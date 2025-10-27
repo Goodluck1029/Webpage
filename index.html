@@ -253,24 +253,51 @@
     scroll-behavior: smooth;
   }
 
+    
+    /* ===== 강제 숨김/표시: 패널 제어 (최우선) ===== */
+    /* 기본: 모든 패널 숨김, active만 보이기 */
+    .panel { display: none !important; }
+    .panel.active { display: block !important; }
+    
+    /* 데스크톱/모바일 전환은 active에만 적용 */
+    .desktop-only, .mobile-only { display: none !important; }
+    .panel.active.desktop-only { display: block !important; }
+    @media (max-width: 768px){
+      .panel.active.desktop-only { display: none !important; }
+      .panel.active.mobile-only  { display: block !important; }
+    }
+    
+    /* 메인 두 섹션은 active 아니면 ‘무조건’ 숨김 (우발적 노출 차단) */
+    #main:not(.active),
+    #main-m:not(.active) { display: none !important; }
 
-/* ===== 강제 숨김/표시: 패널 제어 (최우선) ===== */
-/* 기본: 모든 패널 숨김, active만 보이기 */
-.panel { display: none !important; }
-.panel.active { display: block !important; }
 
-/* 데스크톱/모바일 전환은 active에만 적용 */
-.desktop-only, .mobile-only { display: none !important; }
-.panel.active.desktop-only { display: block !important; }
-@media (max-width: 768px){
-  .panel.active.desktop-only { display: none !important; }
-  .panel.active.mobile-only  { display: block !important; }
-}
-
-/* 메인 두 섹션은 active 아니면 ‘무조건’ 숨김 (우발적 노출 차단) */
-#main:not(.active),
-#main-m:not(.active) { display: none !important; }
-
+    /* 기본(데스크톱): 서브탭 숨김 + 2컬럼 모두 표시 */
+    #archive .subtabs{ display:none; }
+    #archive .subtab-content{
+      display:flex; flex-wrap:wrap; gap:20px;
+    }
+    #archive .subtab-content .col{
+      display:block;                 /* 둘 다 보이기 */
+      flex:1 1 calc(50% - 20px);
+      box-sizing:border-box;
+    }
+    #archive .col img{ width:100%; height:auto; display:block; }
+    
+    /* 모바일: 서브탭 보이고, 선택된 1컬럼만 표시 */
+    @media (max-width:768px){
+      #archive .subtabs{ display:flex; gap:8px; justify-content:center; margin:10px 0 14px; }
+      #archive .subtab{
+        border:1px solid #aaa; background:#eee; padding:6px 12px;
+        border-radius:4px; cursor:pointer; font-size:14px;
+      }
+      #archive .subtab.active{ background:#666; color:#fff; border-color:#666; }
+    
+      #archive .subtab-content{ display:block; }
+      #archive .subtab-content .col{ display:none; }       /* 기본 숨김 */
+      #archive .subtab-content .col.active{ display:block; } /* 선택만 표시 */
+    }
+        
 /* 아래는 모바일 전용 */
     
 
@@ -676,6 +703,72 @@
       }
     });
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    (function(){
+      const root = document.getElementById('archive');
+      if(!root) return;
+    
+      const mql = window.matchMedia('(max-width: 768px)');
+      const subtabsWraps = root.querySelectorAll('.subtabs');
+      const allSubtabs = root.querySelectorAll('.subtabs .subtab');
+      const allCols = root.querySelectorAll('.subtab-content .col');
+    
+      function setDesktopMode(){
+        // 데스크톱: 모든 컬럼 표시, 서브탭 상태는 의미 없음
+        allCols.forEach(c => c.classList.add('active'));
+      }
+    
+      function setMobileMode(){
+        // 모바일: 첫 번째만 활성(없으면 무시)
+        const firstBtn = root.querySelector('.subtabs .subtab');
+        const firstTarget = firstBtn?.dataset.target;
+        allSubtabs.forEach(b => b.classList.toggle('active', b === firstBtn));
+        allCols.forEach(c => c.classList.toggle('active', c.id === firstTarget));
+      }
+    
+      function bindMobileHandlers(){
+        // 클릭 핸들러(중복 방지 위해 기존 핸들러 제거 후 다시 연결)
+        allSubtabs.forEach(btn => {
+          btn._listener && btn.removeEventListener('click', btn._listener);
+          btn._listener = () => {
+            const target = btn.dataset.target;
+            // 탭 active
+            const siblings = btn.closest('.subtabs').querySelectorAll('.subtab');
+            siblings.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // 콘텐츠 active
+            allCols.forEach(c => c.classList.toggle('active', c.id === target));
+          };
+          btn.addEventListener('click', btn._listener);
+        });
+      }
+    
+      function unbindMobileHandlers(){
+        allSubtabs.forEach(btn => {
+          if(btn._listener){ btn.removeEventListener('click', btn._listener); btn._listener = null; }
+        });
+      }
+    
+      function applyMode(e){
+        const isMobile = mql.matches;
+        if(isMobile){
+          bindMobileHandlers();
+          setMobileMode();
+        }else{
+          unbindMobileHandlers();
+          setDesktopMode();
+        }
+      }
+    
+      // 초기 적용 + 뷰포트 변경 시 전환
+      applyMode();
+      mql.addEventListener('change', applyMode);
+    })();
+</script>
+
+
+
+    
   </script>
 </body>
 </html>
