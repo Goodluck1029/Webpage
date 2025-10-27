@@ -341,10 +341,10 @@
     }
 
     /* ===== 공통: subtab-panel (데스크톱=2칼럼, 모바일=서브탭) ===== */
-    .subtab-panel .subtabs{ display:none; }                         /* 데스크톱은 서브탭 숨김 */
-    .subtab-panel .subtab-content{
-      display:flex; flex-wrap:wrap; gap:20px;
-    }
+    .subtab-panel .subtabs { display:none; }
+    .subtab-panel .subtab-content { display:flex; flex-wrap:wrap; gap:20px; }
+    .subtab-panel .subtab-content .col { flex:1 1 calc(50% - 20px); }
+    
     .subtab-panel .subtab-content .col{
       display:block;
       flex:1 1 calc(50% - 20px);
