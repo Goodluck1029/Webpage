@@ -266,40 +266,48 @@
     
 
   /* ✅ 모바일 전용 추가 (새로 추가) */
-  @media (max-width: 768px){
+  
+      @media (max-width: 768px){
   
     /* (A) nav 전체: 줄바꿈 시 간격 유지 */
     .nav{
-      gap:8px;                 /* 줄 간격 (추가됨) */
-      align-items:stretch;     /* 아래로 펼치기 (추가됨) */
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: stretch;
+      margin-top: 10px;     /* 필요하면 조정 */
+      padding: 4px 10px;    /* 필요하면 조정 */
     }
   
-    /* (B) 왼쪽 탭 묶음 */
+    /* (B) 왼쪽 탭 묶음 → 껍데기만 (자식들을 nav로 끌어올림) */
     .nav-left{
-      flex:1 1 100%;           /* 폭 100%로 확장 (추가됨) */
-      flex-wrap:wrap;          /* 줄바꿈 허용 (추가됨) */
-      gap:8px;                 /* 버튼 간격 (추가됨) */
-      order:1;                 /* 상단 순서 유지 (추가됨) */
+      display: contents;    /* 핵심 */
+      gap: 8px;
+      order: 1;
     }
   
-    /* (C) 각 탭 버튼 */
+    /* (C) 일반 탭들: 2열 */
     .tab{
-      width:auto;              /* 기존 width:100px 덮어씀 (수정됨) */
-      min-width:110px;         /* 너무 좁지 않게 (추가됨, 선택사항) */
-      flex:1 1 calc(50% - 8px);/* 2열로 떨어지게 (추가됨) */
-      box-sizing:border-box;   /* 여백 계산 정확히 (추가됨) */
+      width: auto;
+      box-sizing: border-box;
+      flex: 1 1 calc(50% - 8px);
+      order: 1;
     }
-    /* 만약 1열로 쫙 빼고 싶으면 이걸로 바꿔도 됨:
-       .tab{ flex:1 1 100%; } */
+    /* 1열로 쫙:  .tab{ flex:1 1 100%; } 로 바꾸면 됨 */
   
-    /* (D) 브랜드 버튼 */
+    /* (D) 마지막 탭(아카이브실) + 브랜드 버튼 같은 줄 */
+    .tab:last-of-type{
+      order: 2;
+      flex: 1 1 50%;
+      text-align: left;
+    }
     .brand-btn{
-      order:2;                 /* 두 번째 줄로 이동 (추가됨) */
-      flex:1 1 100%;           /* 전체 폭 차지 (추가됨) */
-      width:auto;              /* 기존 width 해제 (수정됨) */
+      order: 2;
+      flex: 1 1 50%;
+      width: auto;
+      text-align: right;
+      white-space: nowrap;
     }
   }
-
     
     
   </style>
