@@ -153,43 +153,73 @@
 
     /* ✅ 모바일 전용 추가 (새로 추가) */
     @media (max-width: 768px){
+    /* 기본 nav 유지 */
+    .nav {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      margin-top:50px;
+      padding:0 20px;
+      border-bottom:1px solid #ddd;
+      background:#C4C6C8;
+      flex-wrap:wrap;
+    }
     
-      /* (A) nav 전체: 줄바꿈 시 간격 유지 */
-      .nav{
-        gap:8px;                 /* 줄 간격 (추가됨) */
-        align-items:stretch;     /* 아래로 펼치기 (추가됨) */
+    .nav-left {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    
+    /* 탭 */
+    .tab {
+      height:30px; line-height:28px; text-align:center;
+      border:1px solid #ccc; background:#C4C6C8; color:#333;
+      cursor:pointer; font-size:14px; transition:background .2s,color .2s,border-color .2s;
+      white-space:nowrap;
+      flex:0 1 auto;
+    }
+    
+    /* 브랜드 버튼 */
+    .brand-btn {
+      height:30px; line-height:28px; text-align:center;
+      border:1px solid #ccc; background:#C4C6C8; color:#333;
+      font-size:13px; cursor:pointer;
+      transition:background .2s,color .2s,border-color .2s;
+      padding:0 12px;
+      white-space:nowrap;
+      flex:0 0 auto;
+    }
+    
+    /* ✅ 반응형 (모바일용) */
+    @media (max-width:768px) {
+      .nav {
+        gap:8px;
       }
     
-      /* (B) 왼쪽 탭 묶음 */
-      .nav-left{
-        flex:1 1 100%;           /* 폭 100%로 확장 (추가됨) */
-        flex-wrap:wrap;          /* 줄바꿈 허용 (추가됨) */
-        gap:8px;                 /* 버튼 간격 (추가됨) */
-        order:1;                 /* 상단 순서 유지 (추가됨) */
+      .nav-left {
+        flex:1 1 100%;
       }
     
-      /* (C) 각 탭 버튼 */
-      .tab{
-        width:auto;              /* 기존 width:100px 덮어씀 (수정됨) */
-        min-width:110px;         /* 너무 좁지 않게 (추가됨, 선택사항) */
-        flex:1 1 calc(50% - 8px);/* 2열로 떨어지게 (추가됨) */
-        box-sizing:border-box;   /* 여백 계산 정확히 (추가됨) */
+      /* 기본 탭들은 2열로 줄바꿈 */
+      .tab {
+        flex:1 1 calc(50% - 8px);
+        width:auto;
       }
-      /* 만약 1열로 쫙 빼고 싶으면 이걸로 바꿔도 됨:
-         .tab{ flex:1 1 100%; } */
     
-        /* 핵심 👇 */
-        /* 마지막 탭(.tab:last-child)과 브랜드 버튼을 같은 줄로 */
-        .tab:last-child,
-        .brand-btn {
-          flex:1 1 50%;             /* 두 개가 한 줄에 나란히 */
-          box-sizing:border-box;
-        }
-      
-        /* 마지막 탭은 왼쪽 정렬, 브랜드 버튼은 오른쪽 정렬 */
-        .tab:last-child { text-align:left; }
-        .brand-btn { text-align:right; }
-          
+      /* 핵심 👇 */
+      /* 마지막 탭(.tab:last-child)과 브랜드 버튼을 같은 줄로 */
+      .tab:last-child,
+      .brand-btn {
+        flex:1 1 50%;             /* 두 개가 한 줄에 나란히 */
+        box-sizing:border-box;
+      }
+    
+      /* 마지막 탭은 왼쪽 정렬, 브랜드 버튼은 오른쪽 정렬 */
+      .tab:last-child { text-align:left; }
+      .brand-btn { text-align:right; }
+    }
+
 
     /* 아카이브 하위 메뉴 (처음엔 숨김) */
     .subnav{display:none; gap:20px; padding:8px 20px 0; font-size:13px; color:#333; margin-bottom:20px}
