@@ -262,36 +262,53 @@
 #main:not(.active),
 #main-m:not(.active) { display: none !important; }
 
-/* 모바일에서 min-width 해제 */
+/* ===== 모바일 네비게이션 높이 및 여백 조정 ===== */
 @media (max-width: 768px){
-  .nav{
-    flex-wrap:wrap;
-    gap:8px;
-    align-items:stretch;
+
+  .nav {
+    flex-wrap: wrap;
+    margin-top: 10px;      /* 기존 50px → 모바일에선 줄임 */
+    padding: 4px 10px;     /* 상단 패딩 줄이기 */
+    gap: 6px;
+    align-items: stretch;
+    justify-content: space-between;
   }
 
-  .nav-left{
-    display:contents; /* tab들을 nav의 직계 flex 아이템으로 */
+  .nav-left {
+    display: contents;     /* 탭들을 nav의 직계 flex-item으로 */
   }
 
-  .tab{
-    flex:1 1 calc(50% - 8px);
-    width:auto;
-    box-sizing:border-box;
+  .tab {
+    flex: 1 1 calc(50% - 6px);
+    width: auto;
+    box-sizing: border-box;
+    font-size: 13px;
+    height: 28px;
+    line-height: 26px;
   }
 
-  /* 마지막 탭 + 브랜드 버튼 같은 줄 */
-  .tab:last-of-type{
-    order:2;
-    flex:1 1 50%;
-    text-align:left;
+  /* 마지막 탭(아카이브실) + 브랜드 버튼 같은 줄 */
+  .tab:last-of-type {
+    order: 2;
+    flex: 1 1 50%;
+    text-align: left;
   }
-  .brand-btn{
-    order:2;
-    flex:1 1 50%;
-    text-align:right;
+  .brand-btn {
+    order: 2;
+    flex: 1 1 50%;
+    text-align: right;
+    font-size: 12px;
+    height: 28px;
+    line-height: 26px;
+    padding: 0 8px;
+  }
+
+  /* 탭과 버튼 아래쪽에 불필요한 보더나 마진 제거 */
+  .nav + .subnav {
+    margin-top: 4px;
   }
 }
+
 
     
   </style>
