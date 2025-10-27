@@ -178,15 +178,18 @@
       /* 만약 1열로 쫙 빼고 싶으면 이걸로 바꿔도 됨:
          .tab{ flex:1 1 100%; } */
     
-      /* (D) 브랜드 버튼 */
-      .brand-btn{
-        order:2;                 /* 두 번째 줄로 이동 (추가됨) */
-        flex:1 1 100%;           /* 전체 폭 차지 (추가됨) */
-        width:auto;              /* 기존 width 해제 (수정됨) */
-      }
-    }
-
-    
+        /* 핵심 👇 */
+        /* 마지막 탭(.tab:last-child)과 브랜드 버튼을 같은 줄로 */
+        .tab:last-child,
+        .brand-btn {
+          flex:1 1 50%;             /* 두 개가 한 줄에 나란히 */
+          box-sizing:border-box;
+        }
+      
+        /* 마지막 탭은 왼쪽 정렬, 브랜드 버튼은 오른쪽 정렬 */
+        .tab:last-child { text-align:left; }
+        .brand-btn { text-align:right; }
+          
 
     /* 아카이브 하위 메뉴 (처음엔 숨김) */
     .subnav{display:none; gap:20px; padding:8px 20px 0; font-size:13px; color:#333; margin-bottom:20px}
