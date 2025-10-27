@@ -327,6 +327,75 @@
   }
   
 }
+
+
+/* 모바일 1컬럼 */
+    /* ===== 기본 (데스크톱) ===== */
+#pair1 .subtabs {
+  display: none; /* 데스크톱에서는 서브탭 숨김 */
+}
+
+#pair1 .subtab-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#pair1 .col {
+  flex: 1 1 calc(50% - 20px);
+  box-sizing: border-box;
+}
+
+#pair1 .col img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+/* ===== 모바일 (서브탭 활성화 + 한 칼럼만 보기) ===== */
+@media (max-width: 768px) {
+  #pair1 .subtabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  #pair1 .subtab {
+    border: 1px solid #aaa;
+    background: #eee;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  #pair1 .subtab.active {
+    background: #666;
+    color: white;
+    border-color: #666;
+  }
+
+  #pair1 .subtab-content {
+    display: block;
+  }
+  #pair1 .col {
+    display: none;
+  }
+  #pair1 .col.active {
+    display: block;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
     
   </style>
 </head>
@@ -683,12 +752,44 @@
       }
     });
     document.getElementById('year').textContent = new Date().getFullYear();
+
+/*모바일1컬럼*/
+(function(){
+  const panel = document.getElementById('pair1');
+  if(!panel) return;
+
+  const tabs = panel.querySelectorAll('.subtab');
+  const cols = panel.querySelectorAll('.col');
+
+  function activate(targetId){
+    tabs.forEach(btn => btn.classList.toggle('active', btn.dataset.target === targetId));
+    cols.forEach(col => col.classList.toggle('active', col.id === targetId));
+  }
+
+  function initMobile(){
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if(!isMobile) {
+      // 데스크톱이면 항상 둘 다 보이게
+      cols.forEach(c => c.classList.add('active'));
+      return;
+    }
+    // 모바일: 탭 클릭으로 전환
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => activate(btn.dataset.target));
+    });
+    // 첫 번째 탭 기본 활성
+    const first = tabs[0]?.dataset.target;
+    if(first) activate(first);
+  }
+
+  initMobile();
+  window.addEventListener('resize', initMobile);
+})();
+
     
 </script>
 
 
 
-    
-  </script>
 </body>
 </html>
