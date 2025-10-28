@@ -353,6 +353,11 @@
       .subtab-panel .subtab{
         border:1px solid #aaa; background:#eee; padding:6px 12px;
         border-radius:4px; cursor:pointer; font-size:14px;
+        /*서브탭 글자색 변경 */
+        color:#333;                /* ← 글자색 명시 (검정 대신 중간톤 회색) */
+        font-family:inherit;       /* ← iOS 기본 폰트 강제 방지 */
+        -webkit-appearance:none;   /* ← iOS 기본 버튼 스타일 제거 */
+        appearance:none;           /* ← 다른 브라우저용 */
       }
       .subtab-panel .subtab.active{ background:#666; color:#fff; border-color:#666; }
     
