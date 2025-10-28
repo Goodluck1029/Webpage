@@ -276,6 +276,12 @@
     
 
   /* ✅ 모바일 전용 추가 (새로 추가) */
+
+  @media (max-width: 768px) {
+    #about .two-columns {
+    grid-template-columns: 1fr;
+    }    
+  }
   
   @media (max-width: 768px){
   
@@ -417,25 +423,7 @@
           <img class="mid5" src="./images/middle 5.png" alt="main 5">
         </div>
       </div>
-        <div class="col">
-          <h2>예술로 만드는 자서전 프로젝트</h2>
-          <h3>1) 이전 세대를 위한 예술의 가능성을 열다</h3>
-          <ul>
-            <li>고령화 시대, 중장년층을 대상으로 한 새로운 예술적 접근을 제안</li>
-            <li>개인의 삶을 돌아보고 재해석할 수 있는 기회를 마련</li>
-          </ul>
-          <p>오늘날 예술 지원과 주제는 주로 젊은 창작자들과 트렌드에 초점이 맞추어져 있다. 이는 혁신적이고 참신한 시도를 장려하기 위한 긍정적인 면이 있으나, 빠른 고령화 추세를 감안할 때 특정 세대만을 주목하는 것은 불균형적 시각을 반영한다.</p>
-          <p>본 기획은 중장년층을 위한 예술 경험을 조명한다. 단순 회상이 아니라, 자신의 삶을 큐레이션 과정으로 재해석하고 예술적으로 표현하는 장을 만든다.</p>
 
-          <h3>2) 스스로를 잃은 세대를 위한 일상의 큐레이션</h3>
-          <ul><li>개인의 자아를 성찰할 기회를 제공하고 예술적 언어로 표현하기</li></ul>
-          <p>MZ세대는 ‘나’를 중심으로 사고하고 독립을 중시한다. 반면 부모 세대는 희생과 헌신의 삶으로 자신을 돌아볼 기회를 갖지 못했다.</p>
-          <p>예술의 본질은 ‘무엇이 중요한가, 왜 중요한가’를 확인하는 과정이다. 일상에서도 가능하며, 잃어버린 자신을 되찾는 계기가 된다.</p>
-
-          <h3>3) 세대 간 대화와 상호 성장을 위한 기회</h3>
-          <ul><li>젊은 예술가와 중장년층의 간극을 줄이고 상호 성장과 사회적 공감을 도모</li></ul>
-          <p>세대 간 대화를 통해 서로의 차이를 이해하고, 공유된 경험을 바탕으로 협업의 기회를 만든다.</p>
-        </div>
     </section>
     
     <section id="main-m" class="panel mobile-only">
@@ -878,7 +866,7 @@
       // 상단 탭 active
       tabs.forEach(t=>t.classList.remove('active'));
       brand.classList.remove('active');
-      if(id==='main' || id==='main-m'){ tabs[0].classList.add('active'); }
+      if(id==='about'){ tabs[0].classList.add('active'); }
       else if(id==='pair2'){ tabs[1].classList.add('active'); }
       else if(id==='pair3'){ tabs[2].classList.add('active'); }
       else if(id==='pair1'){ tabs[3].classList.add('active'); }
