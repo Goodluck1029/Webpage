@@ -382,10 +382,7 @@
   <!-- 상단 네비게이션 -->
   <nav class="nav">
     <div class="nav-left">
-      <button class="tab" onclick="(function(){
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
-        show(isMobile ? 'main-m' : 'main');
-      })()">사업소개</button>
+      <button class="tab" onclick="show('about')">사업소개</button>
       <button class="tab" onclick="show('pair2')">김금옥×안성석</button>
       <button class="tab" onclick="show('pair3')">한재석x박지혜&배은정</button>
       <button class="tab" onclick="show('pair1')">이서석×곽지수</button>
