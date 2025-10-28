@@ -385,11 +385,6 @@
       <button class="tab" onclick="show('pair1')">이서석×곽지수</button>
       <button class="tab" onclick="show('archive')">아카이브실</button>
     </div>
-    <!-- 기존: onclick="show('main')" -->
-    <button class="사업소개" onclick="(function(){
-      const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      show(isMobile ? 'main-m' : 'main');
-    })()">
 
     <button class="brand-btn"
             onclick="window.open('https://www.instagram.com/viscul.lab', '_blank')">
@@ -765,7 +760,7 @@
       // 상단 탭 active
       tabs.forEach(t=>t.classList.remove('active'));
       brand.classList.remove('active');
-      if(id==='about'){ tabs[0].classList.add('active'); }
+      if(id==='main' || id==='main-m'){ tabs[0].classList.add('active'); }
       else if(id==='pair2'){ tabs[1].classList.add('active'); }
       else if(id==='pair3'){ tabs[2].classList.add('active'); }
       else if(id==='pair1'){ tabs[3].classList.add('active'); }
